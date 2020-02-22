@@ -1,4 +1,4 @@
-# AngularCoreWorkshop
+# Angular Core Workshop
 
 This project was generated using [Nx](https://nx.dev).
 
