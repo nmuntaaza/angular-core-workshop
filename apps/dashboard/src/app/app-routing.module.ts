@@ -4,8 +4,14 @@ import { LoginComponent } from '@workshop/ui-login';
 
 
 const routes: Routes = [
-  { path: '', loadChildren: './home/home.module#HomeModule' }, // Lazy loading
-  { path: 'projects', loadChildren: './projects/projects.module#ProjectsModule' }, // Lazy loading (Must use the # or the module will not loaded)
+  {
+    path: '',
+    loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+  },
+  {
+    path: 'projects',
+    loadChildren: () => import('./projects/projects.module').then(m => m.ProjectsModule)
+  },
   {
     path: 'customers',
     loadChildren: () => import('./customers/customers.module').then(m => m.CustomersModule) // Lazy loading with import statement
