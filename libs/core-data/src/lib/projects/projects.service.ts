@@ -1,39 +1,44 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
 import { Project } from './project';
+import { Observable } from 'rxjs';
+
+const BASE_URL = 'http://localhost:3000/';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectsService {
 
-  private projects: Project[] = [
-    {
-      id: '1',
-      title: 'Project One',
-      details: 'This is a sample project',
-      percentComplete: 20,
-      approved: false,
-    },
-    {
-      id: '2',
-      title: 'Project Two',
-      details: 'This is a sample project',
-      percentComplete: 40,
-      approved: false,
-    },
-    {
-      id: '3',
-      title: 'Project Three',
-      details: 'This is a sample project',
-      percentComplete: 100,
-      approved: true,
-    }
-  ];
+  model: String = 'projects';
 
-  constructor() { }
+  constructor(
+    private _http: HttpClient
+  ) { }
 
-  all(): Project[] {
-    return this.projects;
+  getUrl() {
+    return `${BASE_URL}${this.model}`;
+  }
+
+  getUrlForId(id: Number | String) {
+    return `${this.getUrl()}/${id}`;
+  }
+
+  all(): Observable<Project[]> {
+    return this._http.get<Project[]>(`${BASE_URL}${this.model}`);
+  }
+
+  create(project: Project) {
+    return this._http.post(this.getUrl(), project);
+  }
+
+  update(project: Project) {
+    return this._http.patch(this.getUrlForId(project.id), project);
+  }
+
+  delete(id: Number | String) {
+    return this._http.delete(this.getUrlForId(id));
   }
 
 }
