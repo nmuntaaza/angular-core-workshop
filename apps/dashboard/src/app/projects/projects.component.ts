@@ -24,18 +24,26 @@ export class ProjectsComponent implements OnInit {
 
   saveProject(project: Project): void {
     if (project.id != '') {
-      this.projectService.update(project)
-        .subscribe((result: Project) => {
-          this.getProjects();
-          this.selectedProject = result;
-        });
+      this.updateProject(project)
     } else {
-      this.projectService.create(project)
-        .subscribe((result : Project) => {
-          this.getProjects();
-          this.selectProject(result);
-        });
+      this.createProject(project);
     }
+  }
+
+  createProject(project: Project) {
+    this.projectService.create(project)
+      .subscribe((result : Project) => {
+        this.getProjects();
+        this.selectProject(result);
+      });
+  }
+
+  updateProject(project: Project) {
+    this.projectService.update(project)
+      .subscribe((result: Project) => {
+        this.getProjects();
+        this.selectedProject = result;
+      });
   }
 
   getProjects(): void {
