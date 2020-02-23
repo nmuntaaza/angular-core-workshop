@@ -61,12 +61,12 @@
     "eslint": "6.1.0",
     "jest": "24.1.0",
     "jest-preset-angular": "8.0.0",
+    "json-server": "^0.16.1",
+    "jsonwebtoken": "^8.5.1",
     "prettier": "1.18.2",
     "ts-jest": "24.0.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "~3.7.4",
-    "json-server": "^0.16.0",
-    "jsonwebtoken": "^8.5.1"
+    "typescript": "~3.7.4"
   }
 }
