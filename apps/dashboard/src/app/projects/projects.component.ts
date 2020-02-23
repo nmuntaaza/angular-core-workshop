@@ -29,6 +29,12 @@ export class ProjectsComponent implements OnInit {
           this.getProjects();
           this.selectedProject = result;
         });
+    } else {
+      this.projectService.create(project)
+        .subscribe((result : Project) => {
+          this.getProjects();
+          this.selectProject(result);
+        });
     }
   }
 
@@ -38,10 +44,13 @@ export class ProjectsComponent implements OnInit {
 
   deleteProject(project: Project): void {
     this.projectService.delete(project.id)
-      .subscribe(result => this.getProjects());
+      .subscribe(result => {
+        this.getProjects();
+        this.resetProject();
+      });
   } 
 
-  onProjectClick(project: Project): void {
+  selectProject(project: Project): void {
     this.selectedProject = project;
   }
 
